@@ -10,7 +10,7 @@ type AbstractLinkedList interface {
 	// Postcondition: cursor set on the first node in the list
 	Head()
 
-    // Precondition: list is not empty
+        // Precondition: list is not empty
 	// Postcondition: cursor set on the last node in the list
 	Tail()
 
