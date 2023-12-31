@@ -122,13 +122,7 @@ func (ll *TwoWayList) Remove() {
 // Clear
 // Postcondition: linked list is empty
 func (ll *TwoWayList) Clear() {
-	if ll.list.Length() == 0 {
-		return
-	}
-
-	for i := 0; i < ll.list.Length(); i++ {
-		ll.list.RemoveAt(i)
-	}
+	ll.list = list.New()
 }
 
 // AddTail
