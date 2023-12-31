@@ -37,3 +37,26 @@ func (l *List) IndexAt(index int) any {
 
 	return l.list[index]
 }
+
+func (l *List) InsertAfter(index int, value any) {
+	if index >= l.Length() {
+		return
+	}
+
+	left := l.list[:index+1]
+	right := l.list[index+1:]
+
+	updatedList := make([]any, 0, l.Length()+1)
+
+	for _, item := range left {
+		updatedList = append(updatedList, item)
+	}
+
+	updatedList = append(updatedList, value)
+
+	for _, item := range right {
+		updatedList = append(updatedList, item)
+	}
+
+	l.list = updatedList
+}
