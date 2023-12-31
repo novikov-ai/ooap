@@ -28,7 +28,7 @@ type AbstractLinkedList interface {
 
 	// Precondition: current node exists
 	// Postcondition: current node removed and cursor shifted right if node exists or left
-	Remove(value any)
+	Remove()
 
 	// Postcondition: linked list is empty
 	Clear()
@@ -63,12 +63,8 @@ type AbstractLinkedList interface {
 	IsValue() bool
 
 // Additional queries:
-    
-	GetCurrentNodeStatus() int
 	
-	GetNextNodeStatus() int
-	
-	GetCursorStatus() int
+	GetRightStatus() bool
 }
 ~~~
 

@@ -1,6 +1,6 @@
 package linked_list
 
-type AbstractLinkedList interface {
+type Contract interface {
 	// Commands:
 
 	// Head
@@ -9,6 +9,7 @@ type AbstractLinkedList interface {
 	Head()
 
 	// Tail
+	// Precondition: list is not empty
 	// Postcondition: cursor set on the last node in the list
 	Tail()
 
@@ -30,7 +31,7 @@ type AbstractLinkedList interface {
 	// Remove
 	// Precondition: current node exists
 	// Postcondition: current node removed and cursor shifted right if node exists or left
-	Remove(value any)
+	Remove()
 
 	// Clear
 	// Postcondition: linked list is empty
@@ -73,9 +74,5 @@ type AbstractLinkedList interface {
 
 	// Additional queries:
 
-	GetCurrentNodeStatus() int
-
-	GetNextNodeStatus() int
-
-	GetCursorStatus() int
+	GetRightStatus() bool
 }

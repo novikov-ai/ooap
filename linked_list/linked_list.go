@@ -38,7 +38,7 @@ func (ll *LinkedList) PutLeft(value any) {
 }
 
 // Remove Postcondition: current node removed and cursor shifted right if node exists or left
-func (ll *LinkedList) Remove(value any) {
+func (ll *LinkedList) Remove() {
 	// todo: implement
 }
 
@@ -101,17 +101,7 @@ func (ll *LinkedList) IsValue() bool {
 
 // Additional queries:
 
-func (ll *LinkedList) GetCurrentNodeStatus() int {
+func (ll *LinkedList) GetRightStatus() bool {
 	// todo: implement
-	return 0
-}
-
-func (ll *LinkedList) GetNextNodeStatus() int {
-	// todo: implement
-	return 0
-}
-
-func (ll *LinkedList) GetCursorStatus() int {
-	// todo: implement
-	return 0
+	return false
 }
