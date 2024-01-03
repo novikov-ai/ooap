@@ -35,21 +35,26 @@ func New(bound *uint) *BoundedStack {
 	return &bs
 }
 
-// Push Precondition: current size less than bound. Postcondition: new value added to stack.
+// Push
+// Precondition: current size less than bound.
+// Postcondition: new value added to stack.
 func (bs *BoundedStack) Push(value any) {
 	if bs.stack.Length() < int(bs.bound) {
 		bs.stack.Append(value)
 	}
 }
 
-// Clear Postcondition: Stack cleared, size is 0.
+// Clear
+// Postcondition: Stack cleared, size is 0.
 func (bs *BoundedStack) Clear() {
 	bs.stack = list.New()
 	bs.peekStatus = PeekNil
 	bs.popStatus = PopNil
 }
 
-// Pop Precondition: Stack is not empty. Postcondition: last value removed from stack.
+// Pop
+// Precondition: Stack is not empty.
+// Postcondition: last value removed from stack.
 func (bs *BoundedStack) Pop() {
 	if bs.stack.Length() > 0 {
 		bs.stack.RemoveAt(-1)
@@ -59,7 +64,9 @@ func (bs *BoundedStack) Pop() {
 	}
 }
 
-// Peek Precondition: Stack is not empty. Postcondition: stack unchanged.
+// Peek
+// Precondition: Stack is not empty.
+// Postcondition: stack unchanged.
 func (bs *BoundedStack) Peek() any {
 	var result any
 
