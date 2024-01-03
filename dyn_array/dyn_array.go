@@ -88,9 +88,11 @@ func (da *DynArray) Remove(index int) {
 	da.statusRemove = RemoveOK
 }
 
+// Queries
+
 // GetItem
-// Precondition: the array is not empty
-// Postcondition: got item by provided index if index <= size of array
+// Precondition: the array is not empty & index <= size of array
+// Postcondition: got item by provided index
 func (da *DynArray) GetItem(index int) any {
 	if da.count == 0 {
 		da.statusGetItem = GetItemArrayIsEmpty
@@ -105,8 +107,6 @@ func (da *DynArray) GetItem(index int) any {
 	da.statusGetItem = GetItemOK
 	return da.array[index]
 }
-
-// Queries
 
 // Size
 // Get items amount in the array
@@ -124,4 +124,10 @@ func (da *DynArray) GetArrayEmptyStatus() bool {
 // Get status of last executed command GetItem()
 func (da *DynArray) GetItemStatus() int {
 	return da.statusGetItem
+}
+
+// GetRemoveStatus
+// Get status of last executed command Remove()
+func (da *DynArray) GetRemoveStatus() int {
+	return da.statusRemove
 }
