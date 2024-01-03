@@ -7,16 +7,10 @@ import (
 )
 
 func TestList_RemoveAt(t *testing.T) {
-	list := New()
-
-	elements := 10
-	for i := 0; i < elements; i++ {
-		list.Append(i)
-	}
-
 	tests := []struct {
 		name     string
 		index    int
+		input    []any
 		expected []any
 	}{
 		{
@@ -39,14 +33,35 @@ func TestList_RemoveAt(t *testing.T) {
 			index:    15,
 			expected: []interface{}{0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
 		},
+		{
+			name:     "Remove only 1 element",
+			index:    0,
+			input:    []any{1},
+			expected: []interface{}{},
+		},
 	}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			copiedList := list
+			var testingList *List
 
-			copiedList.RemoveAt(test.index)
-			assert.Equal(t, test.expected, copiedList.list)
+			if test.input == nil {
+				testingList = New()
+
+				elements := 10
+				for i := 0; i < elements; i++ {
+					testingList.Append(i)
+				}
+			} else {
+				testingList = New()
+
+				for _, item := range test.input {
+					testingList.Append(item)
+				}
+			}
+
+			testingList.RemoveAt(test.index)
+			assert.Equal(t, test.expected, testingList.list)
 		})
 	}
 }
