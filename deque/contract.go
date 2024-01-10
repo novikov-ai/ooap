@@ -3,8 +3,8 @@ package deque
 type Contract interface {
 	AddFront(value any)
 	AddTail(value any)
-	RemoveFront()
-	RemoveTail()
+	RemoveFront() any
+	RemoveTail() any
 	Size() int
 	GetRemoveFrontStatus() int
 	GetRemoveTailStatus() int

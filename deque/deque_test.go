@@ -75,9 +75,10 @@ func TestDeque_AddTail(t *testing.T) {
 
 func TestDeque_RemoveFront(t *testing.T) {
 	testCases := []struct {
-		name     string
-		in       Deque
-		expected Deque
+		name            string
+		in              Deque
+		expected        Deque
+		expectedRemoved any
 	}{
 		{
 			name: "removed the front element",
@@ -86,6 +87,7 @@ func TestDeque_RemoveFront(t *testing.T) {
 				deque:             []interface{}{2, 3, 4, 5, 6, 7},
 				removeFrontStatus: RemoveTailStatusOK,
 			},
+			expectedRemoved: 1,
 		},
 		{
 			name: "removed the only 1 element",
@@ -94,6 +96,7 @@ func TestDeque_RemoveFront(t *testing.T) {
 				deque:             []interface{}{},
 				removeFrontStatus: RemoveFrontStatusOK,
 			},
+			expectedRemoved: 6,
 		},
 		{
 			name: "try to remove from empty deque",
@@ -102,6 +105,7 @@ func TestDeque_RemoveFront(t *testing.T) {
 				deque:             []interface{}{},
 				removeFrontStatus: RemoveFrontStatusError,
 			},
+			expectedRemoved: nil,
 		},
 	}
 
@@ -109,8 +113,9 @@ func TestDeque_RemoveFront(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			deque := test.in
 
-			deque.RemoveFront()
+			removed := deque.RemoveFront()
 
+			assert.Equal(t, test.expectedRemoved, removed)
 			assert.Equal(t, test.expected, deque)
 		})
 	}
@@ -118,9 +123,10 @@ func TestDeque_RemoveFront(t *testing.T) {
 
 func TestDeque_RemoveTail(t *testing.T) {
 	testCases := []struct {
-		name     string
-		in       Deque
-		expected Deque
+		name            string
+		in              Deque
+		expected        Deque
+		expectedRemoved any
 	}{
 		{
 			name: "removed the tail element",
@@ -129,6 +135,7 @@ func TestDeque_RemoveTail(t *testing.T) {
 				deque:            []interface{}{1, 2, 3, 4, 5, 6},
 				removeTailStatus: RemoveTailStatusOK,
 			},
+			expectedRemoved: 7,
 		},
 		{
 			name: "removed the only 1 element",
@@ -137,6 +144,7 @@ func TestDeque_RemoveTail(t *testing.T) {
 				deque:            []interface{}{},
 				removeTailStatus: RemoveTailStatusOK,
 			},
+			expectedRemoved: 6,
 		},
 		{
 			name: "try to remove from empty deque",
@@ -145,6 +153,7 @@ func TestDeque_RemoveTail(t *testing.T) {
 				deque:            []interface{}{},
 				removeTailStatus: RemoveTailStatusError,
 			},
+			expectedRemoved: nil,
 		},
 	}
 
@@ -152,8 +161,9 @@ func TestDeque_RemoveTail(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			deque := test.in
 
-			deque.RemoveTail()
+			removed := deque.RemoveTail()
 
+			assert.Equal(t, test.expectedRemoved, removed)
 			assert.Equal(t, test.expected, deque)
 		})
 	}

@@ -45,11 +45,13 @@ func (d *Deque) AddTail(value any) {
 // RemoveFront
 // Precondition: the deque is not empty
 // Postcondition: the element removed from the front of deque
-func (d *Deque) RemoveFront() {
+func (d *Deque) RemoveFront() any {
 	if len(d.deque) == 0 {
 		d.removeFrontStatus = RemoveFrontStatusError
-		return
+		return nil
 	}
+
+	front := d.deque[0]
 
 	if len(d.deque) == 1 {
 		d.deque = []any{}
@@ -58,16 +60,20 @@ func (d *Deque) RemoveFront() {
 	}
 
 	d.removeFrontStatus = RemoveFrontStatusOK
+
+	return front
 }
 
 // RemoveTail
 // Precondition: the deque is not empty
 // Postcondition: the element removed from the tail of deque
-func (d *Deque) RemoveTail() {
+func (d *Deque) RemoveTail() any {
 	if len(d.deque) == 0 {
 		d.removeTailStatus = RemoveTailStatusError
-		return
+		return nil
 	}
+
+	tail := d.deque[len(d.deque)-1]
 
 	if len(d.deque) == 1 {
 		d.deque = []any{}
@@ -76,6 +82,8 @@ func (d *Deque) RemoveTail() {
 	}
 
 	d.removeTailStatus = RemoveTailStatusOK
+
+	return tail
 }
 
 // Queries:
