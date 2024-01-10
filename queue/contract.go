@@ -1,7 +1,8 @@
 package queue
 
 type Contract interface {
-	Enqueue(value any)
-	Dequeue() any
+	AddTail(value any)
+	RemoveFront() any
 	Size() int
+	GetRemovedFrontStatus() int
 }

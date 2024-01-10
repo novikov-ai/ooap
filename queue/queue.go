@@ -1,46 +1,46 @@
 package queue
 
 const (
-	DequeuededStatusNil = iota
-	DequeuededStatusError
-	DequeuededStatusOK
+	RemovedFrontStatusNil = iota
+	RemovedFrontStatusError
+	RemovedFrontStatusOK
 )
 
 type Queue struct {
-	queue         []any
-	dequeueStatus int
+	queue              []any
+	removedFrontStatus int
 }
 
 // New
 // Postcondition: new empty queue created
 func New() *Queue {
 	return &Queue{
-		queue:         []any{},
-		dequeueStatus: DequeuededStatusNil,
+		queue:              []any{},
+		removedFrontStatus: RemovedFrontStatusNil,
 	}
 }
 
 // Commands:
 
-// Enqueue
-// Postcondition: the element added to the queue
-func (q *Queue) Enqueue(value any) {
+// AddTail
+// Postcondition: the element added to the queue tail
+func (q *Queue) AddTail(value any) {
 	q.queue = append(q.queue, value)
 }
 
-// Dequeue
+// RemoveFront
 // Precondition: queue is not empty
 // Postcondition: head element dequeueded from the queue & it's size reduced by 1
-func (q *Queue) Dequeue() any {
+func (q *Queue) RemoveFront() any {
 	if len(q.queue) == 0 {
-		q.dequeueStatus = DequeuededStatusError
+		q.removedFrontStatus = RemovedFrontStatusError
 		return nil
 	}
 
 	dequeued := q.queue[0]
 	q.queue = q.queue[1:]
 
-	q.dequeueStatus = DequeuededStatusOK
+	q.removedFrontStatus = RemovedFrontStatusOK
 
 	return dequeued
 }
@@ -53,8 +53,8 @@ func (q *Queue) Size() int {
 	return len(q.queue)
 }
 
-// GetDequeuededStatus
-// Got status of the last executed Dequeue() command
-func (q *Queue) GetDequeuededStatus() int {
-	return q.dequeueStatus
+// GetRemovedFrontStatus
+// Got status of the last executed RemovedFront() command
+func (q *Queue) GetRemovedFrontStatus() int {
+	return q.removedFrontStatus
 }

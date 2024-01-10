@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestQueue_Enqueue(t *testing.T) {
+func TestQueue_AddTail(t *testing.T) {
 	testCases := []struct {
 		name     string
 		in       Queue
@@ -31,7 +31,7 @@ func TestQueue_Enqueue(t *testing.T) {
 			queue := test.in
 
 			for _, el := range test.elements {
-				queue.Enqueue(el)
+				queue.AddTail(el)
 			}
 
 			assert.Equal(t, test.expected, queue)
@@ -39,7 +39,7 @@ func TestQueue_Enqueue(t *testing.T) {
 	}
 }
 
-func TestQueue_Dequeue(t *testing.T) {
+func TestQueue_RemovedFront(t *testing.T) {
 	testCases := []struct {
 		name             string
 		in               Queue
@@ -48,24 +48,32 @@ func TestQueue_Dequeue(t *testing.T) {
 		expectedElements []any
 	}{
 		{
-			name:             "dequeue 2 elements",
-			in:               Queue{queue: []interface{}{1, 2, 3, 4, 5}},
-			times:            2,
-			expected:         Queue{queue: []interface{}{3, 4, 5}},
+			name:  "dequeue 2 elements",
+			in:    Queue{queue: []interface{}{1, 2, 3, 4, 5}},
+			times: 2,
+			expected: Queue{
+				queue:              []interface{}{3, 4, 5},
+				removedFrontStatus: RemovedFrontStatusOK,
+			},
 			expectedElements: []interface{}{1, 2},
 		},
 		{
-			name:             "dequeue only 1 element",
-			in:               Queue{queue: []interface{}{1}},
-			times:            1,
-			expected:         Queue{queue: []interface{}{}},
+			name:  "dequeue only 1 element",
+			in:    Queue{queue: []interface{}{1}},
+			times: 1,
+			expected: Queue{
+				queue:              []interface{}{},
+				removedFrontStatus: RemovedFrontStatusOK,
+			},
 			expectedElements: []interface{}{1},
 		},
 		{
-			name:             "dequeue element from empty queue",
-			in:               Queue{queue: []interface{}{}},
-			times:            1,
-			expected:         Queue{queue: []interface{}{}},
+			name:  "dequeue element from empty queue",
+			in:    Queue{queue: []interface{}{}},
+			times: 1,
+			expected: Queue{
+				queue:              []interface{}{},
+				removedFrontStatus: RemovedFrontStatusError},
 			expectedElements: []interface{}{},
 		},
 	}
@@ -76,7 +84,7 @@ func TestQueue_Dequeue(t *testing.T) {
 
 			gotElements := make([]interface{}, 0, 0)
 			for i := 0; i < test.times; i++ {
-				got := queue.Dequeue()
+				got := queue.RemoveFront()
 				if got == nil {
 					continue
 				}
@@ -97,13 +105,13 @@ func TestQueue_Size(t *testing.T) {
 	assert.Equal(t, 0, queue.Size())
 
 	for _, el := range []int{1, 2, 3, 4, 5} {
-		queue.Enqueue(el)
+		queue.AddTail(el)
 	}
 
 	assert.Equal(t, 5, queue.Size())
 
 	for i := 0; i < 3; i++ {
-		queue.Dequeue()
+		queue.RemoveFront()
 	}
 
 	assert.Equal(t, 2, queue.Size())
