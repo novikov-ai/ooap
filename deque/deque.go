@@ -96,12 +96,12 @@ func (d *Deque) Size() int {
 
 // GetRemoveFrontStatus
 // Got status of the last executed RemoveFront(value any) command
-func (d *Deque) GetRemoveFrontStatus() int {
+func (d *Deque) GetRemovedFrontStatus() int {
 	return d.removeFrontStatus
 }
 
 // GetRemoveTailStatus
 // Got status of the last executed RemoveTail(value any) command
-func (d *Deque) GetRemoveTailStatus() int {
+func (d *Deque) GetRemovedTailStatus() int {
 	return d.removeTailStatus
 }
