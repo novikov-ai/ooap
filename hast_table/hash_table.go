@@ -10,6 +10,7 @@ const (
 
 type HashTable struct {
 	size      int
+	count     int
 	elements  []any
 	putStatus int
 }
@@ -17,6 +18,7 @@ type HashTable struct {
 func New(size int) *HashTable {
 	return &HashTable{
 		size:      size,
+		count:     0,
 		elements:  make([]any, size),
 		putStatus: PutNil,
 	}
@@ -27,17 +29,18 @@ func New(size int) *HashTable {
 // Put
 // Precondition: current size is less than capacity & found a free slot
 // Postcondition: new value inserted in the hashtable
-func (ht *HashTable) Put(value any) bool {
+func (ht *HashTable) Put(value any) int {
 	index := ht.FindFreeSlot(value)
-	if len(ht.elements) == ht.size || index == SlotNotFound {
+	if ht.count == ht.size || index == SlotNotFound {
 		ht.putStatus = PutError
-		return false
+		return index
 	}
 
 	ht.elements[index] = value
-
 	ht.putStatus = PutOK
-	return true
+	ht.count++
+
+	return index
 }
 
 // Remove
@@ -49,6 +52,7 @@ func (ht *HashTable) Remove(value any) {
 	}
 
 	ht.elements[index] = nil
+	ht.count--
 }
 
 // Queries:
@@ -56,7 +60,7 @@ func (ht *HashTable) Remove(value any) {
 // Size
 // Count elements of the hashtable
 func (ht *HashTable) Size() int {
-	return len(ht.elements)
+	return ht.count
 }
 
 // Hash
@@ -83,7 +87,7 @@ func (ht *HashTable) Find(value any) int {
 // FindFreeSlot
 // Return free slot index and SlotNotFound if all slots are occupied
 func (ht *HashTable) FindFreeSlot(value any) int {
-	if len(ht.elements) == ht.size {
+	if ht.count == ht.size {
 		return SlotNotFound
 	}
 
@@ -93,7 +97,7 @@ func (ht *HashTable) FindFreeSlot(value any) int {
 	}
 
 	for i := 0; i <= ht.size; i++ {
-		freeSlotIndex := (hashIndex + (ht.size - len(ht.elements))) % (ht.size - 1)
+		freeSlotIndex := (i + hashIndex + (ht.size - ht.count)) % (ht.size - 1)
 		if ht.elements[freeSlotIndex] == nil {
 			return freeSlotIndex
 		}
