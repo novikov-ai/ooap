@@ -4,25 +4,33 @@ const (
 	PutNil = iota
 	PutError
 	PutOK
-
-	SlotNotFound = -1
 )
 
+const (
+	RemoveNil = iota
+	RemoveError
+	RemoveOK
+)
+
+const SlotNotFound = -1
+
 type HashTable struct {
-	size      int
-	count     int
-	elements  []any
-	putStatus int
+	size         int
+	count        int
+	elements     []any
+	putStatus    int
+	removeStatus int
 }
 
 // New
-// Postcondition: Created a new empty hashtable with maximum size
+// Postcondition: Created a new empty hashtable with predefined size
 func New(size int) *HashTable {
 	return &HashTable{
-		size:      size,
-		count:     0,
-		elements:  make([]any, size),
-		putStatus: PutNil,
+		size:         size,
+		count:        0,
+		elements:     make([]any, size),
+		putStatus:    PutNil,
+		removeStatus: RemoveNil,
 	}
 }
 
@@ -46,14 +54,17 @@ func (ht *HashTable) Put(value any) int {
 }
 
 // Remove
+// Precondition: a given value exists in the hashtable
 // Postcondition: a given value removed from the hashtable if exists
 func (ht *HashTable) Remove(value any) {
 	index := ht.FindFreeSlot(value)
 	if index == SlotNotFound {
+		ht.removeStatus = RemoveError
 		return
 	}
 
 	ht.elements[index] = nil
+	ht.removeStatus = RemoveOK
 	ht.count--
 }
 
@@ -112,4 +123,10 @@ func (ht *HashTable) FindFreeSlot(value any) int {
 // Return status of the last executed command Put
 func (ht *HashTable) GetPutStatus() int {
 	return ht.putStatus
+}
+
+// GetRemoveStatus
+// Return status of the last executed command Remove
+func (ht *HashTable) GetRemoveStatus() int {
+	return ht.removeStatus
 }

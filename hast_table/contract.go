@@ -8,4 +8,5 @@ type Contract interface {
 	Find(value any) int
 	FindFreeSlot(value any) int
 	GetPutStatus() int
+	GetRemoveStatus() int
 }
