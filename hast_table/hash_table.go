@@ -15,6 +15,8 @@ type HashTable struct {
 	putStatus int
 }
 
+// New
+// Got a new empty hashtable with maximum size
 func New(size int) *HashTable {
 	return &HashTable{
 		size:      size,
