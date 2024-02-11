@@ -1,4 +1,4 @@
-package hast_table
+package hash_table
 
 const (
 	PutNil = iota
