@@ -17,13 +17,13 @@
 
 ### АТД популярных структур данных
 
-- [Linked List](linked_list/contract.go)
-- [Two Way List](two_way_list/contract.go)
-- [Bloom Filter](bloom_filter/contract.go)
-- [Bounded Stack](bounded_stack/contract.go)
-- [Queue](queue/contract.go)
-- [Deque](deque/contract.go)
-- [Dyn Array](dyn_array/contract.go)
-- [Hash Table](hash_table/contract.go)
-- [Power Set](power_set/contract.go)
-- [Native Dictionary](native_dictionary/contract.go)
+- [Linked List](abstract_data_types/linked_list/contract.go)
+- [Two Way List](abstract_data_types/two_way_list/contract.go)
+- [Bloom Filter](abstract_data_types/bloom_filter/contract.go)
+- [Bounded Stack](abstract_data_types/bounded_stack/contract.go)
+- [Queue](abstract_data_types/queue/contract.go)
+- [Deque](abstract_data_types/deque/contract.go)
+- [Dyn Array](abstract_data_types/dyn_array/contract.go)
+- [Hash Table](abstract_data_types/hash_table/contract.go)
+- [Power Set](abstract_data_types/power_set/contract.go)
+- [Native Dictionary](abstract_data_types/native_dictionary/contract.go)

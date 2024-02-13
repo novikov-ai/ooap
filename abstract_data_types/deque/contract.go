@@ -1,6 +1,8 @@
 package deque
 
-import "ooap/queue"
+import (
+	"ooap/abstract_data_types/queue"
+)
 
 type Contract interface {
 	queue.Contract

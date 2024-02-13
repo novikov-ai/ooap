@@ -1,6 +1,8 @@
 package two_way_list
 
-import "ooap/list"
+import (
+	"ooap/abstract_data_types/list"
+)
 
 type TwoWayList struct {
 	list        *list.List

@@ -1,6 +1,8 @@
 package bounded_stack
 
-import "ooap/list"
+import (
+	"ooap/abstract_data_types/list"
+)
 
 const (
 	PopNil = 0

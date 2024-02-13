@@ -1,7 +1,7 @@
 package power_set
 
 import (
-	"ooap/hash_table"
+	"ooap/abstract_data_types/hash_table"
 )
 
 type Contract interface {
